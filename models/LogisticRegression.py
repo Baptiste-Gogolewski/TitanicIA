@@ -34,18 +34,3 @@ class LogisticRegression:
         y_pred: np.ndarray = sigmoid(linear_pred)
         class_pred: list[int] = [0 if y <= 0.5 else 1 for y in y_pred]
         return class_pred
-
-def accuracy(y_pred: np.ndarray, y_test: np.ndarray):
-    accuracy: np.ndarray = np.sum(y_test == y_pred) / len(y_test)
-    return accuracy
-
-# if __name__ == "__main__":
-#     bc = datasets.load_breast_cancer()
-#     X, y = bc.data, bc.target
-#     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1234)
-
-#     clf = LogisticRegression(learning_rate = 0.001, n_iters = 10000)
-#     clf.fit(X_train, y_train)
-#     y_pred = clf.predict(X_test)
-
-#     print(accuracy(y_pred, y_test))

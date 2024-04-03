@@ -1,8 +1,8 @@
 import numpy as np
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
-from LogisticRegression import LogisticRegression
-from LogisticRegression import accuracy
+from models.LogisticRegression import LogisticRegression
+from models.KNN import KNN
 
 DATA_DIR = "data/"
 TRAIN_FILE = "train.csv"
@@ -33,19 +33,33 @@ def load_test_data(filepath: str):
     X_test: np.ndarray = data.astype(float)
     return X_test
 
+def accuracy(y_pred: np.ndarray, y_test: np.ndarray):
+    accuracy: np.ndarray = np.sum(y_test == y_pred) / len(y_test)
+    return accuracy
+
+def show_datas(X_train: np.ndarray, y_train: np.ndarray, cmap: str = "viridis"):
+    plt.figure()
+    plt.scatter(X_train[:,2], X_train[:,3], c = y_train, cmap = cmap, edgecolors = "k", s = 20)
+    plt.show()
 
 if __name__ == "__main__":
     X_train, y_train = load_train_data(DATA_DIR + TRAIN_FILE)
     X_train, X_test, y_train, y_test = train_test_split(X_train, y_train, test_size=0.2, random_state=1234)
+    # X_test = load_test_data(DATA_DIR + TEST_FILE)
+
+    # show_datas(X_train, y_train)
 
     # Initialize the model
-    clf = LogisticRegression(learning_rate = 0.01)
+    # clf = LogisticRegression(learning_rate = 0.01)
+    knn = KNN(k = 5)
 
     # Model training
-    clf.fit(X_train, y_train)
+    # clf.fit(X_train, y_train)
+    knn.fit(X_train, y_train)
 
     # Model prediction
-    y_pred: list[int] = clf.predict(X_test)
+    # y_pred: list[int] = clf.predict(X_test)
+    y_pred: list[int] = knn.predict(X_test)
     
     # Model evaluation
     print(accuracy(y_pred, y_test))
