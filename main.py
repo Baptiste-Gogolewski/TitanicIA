@@ -3,6 +3,7 @@ from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 from models.LogisticRegression import LogisticRegression
 from models.KNN import KNN
+from models.NaiveBayes import NaiveBayes
 
 DATA_DIR = "data/"
 TRAIN_FILE = "train.csv"
@@ -51,15 +52,18 @@ if __name__ == "__main__":
 
     # Initialize the model
     # clf = LogisticRegression(learning_rate = 0.01)
-    knn = KNN(k = 5)
+    # knn = KNN(k = 5)
+    NaiveBayes = NaiveBayes()
 
     # Model training
     # clf.fit(X_train, y_train)
-    knn.fit(X_train, y_train)
+    # knn.fit(X_train, y_train)
+    NaiveBayes.fit(X_train, y_train)
 
     # Model prediction
     # y_pred: list[int] = clf.predict(X_test)
-    y_pred: list[int] = knn.predict(X_test)
+    # y_pred: list[int] = knn.predict(X_test)
+    y_pred: np.ndarray = NaiveBayes.predict(X_test)
     
     # Model evaluation
     print(accuracy(y_pred, y_test))
