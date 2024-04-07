@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from models.LogisticRegression import LogisticRegression
 from models.KNN import KNN
 from models.NaiveBayes import NaiveBayes
+from models.DecisionTree import DecisionTree
 
 DATA_DIR = "data/"
 TRAIN_FILE = "train.csv"
@@ -53,17 +54,19 @@ if __name__ == "__main__":
     # Initialize the model
     # clf = LogisticRegression(learning_rate = 0.01)
     # knn = KNN(k = 5)
-    NaiveBayes = NaiveBayes()
+    # NaiveBayes = NaiveBayes()
+    DecisionTree = DecisionTree()
 
     # Model training
     # clf.fit(X_train, y_train)
     # knn.fit(X_train, y_train)
-    NaiveBayes.fit(X_train, y_train)
+    # NaiveBayes.fit(X_train, y_train)
+    DecisionTree.fit(X_train, y_train)
 
     # Model prediction
     # y_pred: list[int] = clf.predict(X_test)
     # y_pred: list[int] = knn.predict(X_test)
-    y_pred: np.ndarray = NaiveBayes.predict(X_test)
+    y_pred: np.ndarray = DecisionTree.predict(X_test)
     
     # Model evaluation
     print(accuracy(y_pred, y_test))
