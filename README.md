@@ -4,7 +4,7 @@ This repository implements different types of artificial intelligence. You can t
 
 ## Models
 
-There are currently 4 models : K-nearest-Neighbors, Logistic Regression, Naive Bayes and a Decision tree.
+There are currently 5 models : K-nearest-Neighbors, Logistic Regression, Naive Bayes, a Decision tree and a random forest
 
 ## Split the dataset
 
