@@ -6,6 +6,7 @@ from models.KNN import KNN
 from models.NaiveBayes import NaiveBayes
 from models.DecisionTree import DecisionTree
 from models.RandomForest import RandomForest
+from models.SVM import SVM
 
 DATA_DIR = "data/"
 TRAIN_FILE = "train.csv"
@@ -57,19 +58,21 @@ if __name__ == "__main__":
     # knn = KNN(k = 5)
     # NaiveBayes = NaiveBayes()
     # DecisionTree = DecisionTree()
-    RandomForest = RandomForest(n_trees = 20)
+    # RandomForest = RandomForest(n_trees = 20)
+    svm = SVM(learning_rate = 0.01, lambda_param = 0.01, n_iters = 10000)
 
     # Model training
     # clf.fit(X_train, y_train)
     # knn.fit(X_train, y_train)
     # NaiveBayes.fit(X_train, y_train)
     # DecisionTree.fit(X_train, y_train)
-    RandomForest.fit(X_train, y_train)
+    # RandomForest.fit(X_train, y_train)
+    svm.fit(X_train, y_train)
 
     # Model prediction
     # y_pred: list[int] = clf.predict(X_test)
     # y_pred: list[int] = knn.predict(X_test)
-    y_pred: np.ndarray = RandomForest.predict(X_test)
+    y_pred: np.ndarray = svm.predict(X_test)
     
     # Model evaluation
     print("oui")
