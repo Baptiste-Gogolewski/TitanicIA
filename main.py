@@ -7,6 +7,7 @@ from models.NaiveBayes import NaiveBayes
 from models.DecisionTree import DecisionTree
 from models.RandomForest import RandomForest
 from models.SVM import SVM
+from models.PCA import PCA
 
 DATA_DIR = "data/"
 TRAIN_FILE = "train.csv"
@@ -46,10 +47,20 @@ def show_datas(X_train: np.ndarray, y_train: np.ndarray, cmap: str = "viridis"):
     plt.scatter(X_train[:,2], X_train[:,3], c = y_train, cmap = cmap, edgecolors = "k", s = 20)
     plt.show()
 
+
+def Transform(X: np.ndarray) -> np.ndarray:
+    pca = PCA(n_components = 6)
+    pca.fit(X)
+    return pca.transform(X)
+
+
 if __name__ == "__main__":
     X_train, y_train = load_train_data(DATA_DIR + TRAIN_FILE)
     X_train, X_test, y_train, y_test = train_test_split(X_train, y_train, test_size=0.2, random_state=1234)
     # X_test = load_test_data(DATA_DIR + TEST_FILE)
+    # print(f"Shape X_train : {X_train.shape}")
+    # X_train = Transform(X_train)
+    # print(f"Shape X_train : {X_train.shape}")
 
     # show_datas(X_train, y_train)
 
@@ -59,7 +70,7 @@ if __name__ == "__main__":
     # NaiveBayes = NaiveBayes()
     # DecisionTree = DecisionTree()
     # RandomForest = RandomForest(n_trees = 20)
-    svm = SVM(learning_rate = 0.01, lambda_param = 0.01, n_iters = 10000)
+    svm = SVM(learning_rate = 0.001, lambda_param = 0.001, n_iters = 100000)
 
     # Model training
     # clf.fit(X_train, y_train)
@@ -75,5 +86,4 @@ if __name__ == "__main__":
     y_pred: np.ndarray = svm.predict(X_test)
     
     # Model evaluation
-    print("oui")
     print(accuracy(y_pred, y_test))
