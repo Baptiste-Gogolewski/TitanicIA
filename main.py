@@ -8,12 +8,13 @@ from models.DecisionTree import DecisionTree
 from models.RandomForest import RandomForest
 from models.SVM import SVM
 from models.PCA import PCA
+from models.DeepNeuronPOO import DeepNeuronPOO
 
 DATA_DIR = "data/"
 TRAIN_FILE = "train.csv"
 TEST_FILE = "test.csv"
 
-def load_train_data(filepath: str):
+def load_train_data(filepath: str) -> tuple[np.ndarray, np.ndarray]:
     print("Loading data from file: ", filepath)
     data: np.ndarray = np.genfromtxt(filepath, delimiter=',', skip_header=1, dtype=str)
 
@@ -61,6 +62,8 @@ if __name__ == "__main__":
     # print(f"Shape X_train : {X_train.shape}")
     # X_train = Transform(X_train)
     # print(f"Shape X_train : {X_train.shape}")
+    X_train = X_train.T
+    y_train = y_train.reshape((1, y_train.shape[0]))
 
     # show_datas(X_train, y_train)
 
@@ -70,7 +73,8 @@ if __name__ == "__main__":
     # NaiveBayes = NaiveBayes()
     # DecisionTree = DecisionTree()
     # RandomForest = RandomForest(n_trees = 20)
-    svm = SVM(learning_rate = 0.001, lambda_param = 0.001, n_iters = 100000)
+    # svm = SVM(learning_rate = 0.001, lambda_param = 0.001, n_iters = 100000)
+    neuron = DeepNeuronPOO(X_train, y_train, hidden_layers = (2, 8, 8, 8, 8), learning_rate = 0.1, n_iter = 50000)
 
     # Model training
     # clf.fit(X_train, y_train)
@@ -78,12 +82,14 @@ if __name__ == "__main__":
     # NaiveBayes.fit(X_train, y_train)
     # DecisionTree.fit(X_train, y_train)
     # RandomForest.fit(X_train, y_train)
-    svm.fit(X_train, y_train)
+    # svm.fit(X_train, y_train)
+    neuron.fit(X_train, y_train)
+    neuron.plot_training_history()
 
     # Model prediction
     # y_pred: list[int] = clf.predict(X_test)
     # y_pred: list[int] = knn.predict(X_test)
-    y_pred: np.ndarray = svm.predict(X_test)
+    # y_pred: np.ndarray = svm.predict(X_test)
     
     # Model evaluation
-    print(accuracy(y_pred, y_test))
+    # print(accuracy(y_pred, y_test))
