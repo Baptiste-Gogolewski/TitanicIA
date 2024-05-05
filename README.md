@@ -1,10 +1,10 @@
 # TitanicIA
 
-This repository implements different types of artificial intelligence. You can test each class and you can also use your own dataset by putting it in the data directory.
+This repository implements different types of artificial intelligence. You can test each class and you can also use your own dataset by putting it in the data directory. If you use your own dataset, you will need to modify the function that extracts data.
 
 ## Models
 
-There are currently 6 models : K-nearest-Neighbors, Logistic Regression, Naive Bayes, a Decision tree, a random forest,s a support vector machine and a pca to transform data.
+There are currently 6 models : K-nearest-Neighbors, Logistic Regression, Naive Bayes, a Decision tree, a Random Forests, a Support Vector Machine and a PCA to transform data.
 
 ## Split the dataset
 
