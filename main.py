@@ -9,7 +9,6 @@ from models.RandomForest import RandomForest
 from models.SVM import SVM
 from models.PCA import PCA
 from models.DeepNeuronPOO import DeepNeuronPOO
-from models.KMeans import KMeans
 
 DATA_DIR = "data/"
 TRAIN_FILE = "train.csv"
